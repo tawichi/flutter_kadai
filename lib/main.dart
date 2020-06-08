@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage>{
           children: <Widget>[
             ListTile(
 
-              title: Text('月曜締め切り'),
+              title: Text('月曜締め切りだよ'),
               trailing:  Icon(Icons.arrow_forward_ios),
 
               onTap: (){
