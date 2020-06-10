@@ -8,7 +8,7 @@ class MondayPage extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     return
-      new  MyHomePage(
+      new  MyHomePageM(
 
 
 
@@ -17,19 +17,19 @@ class MondayPage extends StatelessWidget{
   }
 }
 
-class MyHomePage extends StatefulWidget{
-  MyHomePage({this.title}): super();
+class MyHomePageM extends StatefulWidget{
+  MyHomePageM({this.title}): super();
 
   final String title;
 
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _MyHomePageMState createState() => new _MyHomePageMState();
 }
 
 
 //インスタンスからウィジェットを作る
 
-class _MyHomePageState extends State<MyHomePage>{
+class _MyHomePageMState extends State<MyHomePageM>{
   String _message;
   bool _checked = false;
 
@@ -41,15 +41,8 @@ class _MyHomePageState extends State<MyHomePage>{
       appBar: AppBar(
         title: Text('月曜締め切り'),
       ),
-      body: Checkbox(
-        value: _checked,
-        onChanged: (bool value) {
-          setState(() {
-            _checked = value;
-          });
-        },
-      )
-      ,
+      body: Text('課題の入力')
+
     );
 
 

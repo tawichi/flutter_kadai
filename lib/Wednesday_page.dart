@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage>{
   String _message;
   bool _checked1 = false;
   bool _checked2 = false;
-
+  bool _checked3 = false;
 
   @override
 
@@ -87,8 +87,41 @@ class _MyHomePageState extends State<MyHomePage>{
 
 
             ),
+            Text(
+              '情報数学概論  ',
+              style: TextStyle(fontSize: 16.0),
+            ),
+
+            Row(
+
+              children: <Widget>[
+
+                Checkbox(
+                  value:  _checked3,
+                  onChanged: (bool value) {
+                    setState(() {
+                      _checked3 = value;
+                    });
+                  },
+                ),
+                Text('提出済み',)
+
+              ],
+            ),
             Text('備考欄'),
-            TextField(),
+            TextField(
+              autofocus: true,
+              decoration: InputDecoration(
+                  hintText: '特記事項があれば記入'
+              ),
+            ),
+            RaisedButton(
+              onPressed: (){
+                Navigator.pop(context);
+
+              },
+              child: Center(child: Text('戻る')),
+            )
           ],
 
         ) ,

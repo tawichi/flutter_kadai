@@ -39,13 +39,8 @@ class MyHomePage extends StatefulWidget{
 
 class _MyHomePageState extends State<MyHomePage>{
   String _message;
-  var _checked = false;
-  void checkChanged(bool value){
-    setState(() {
-      value = _checked;
-      _message = value ? 'checked!' : 'not checked...';
-    });
-  }
+  bool _checked1 = false;
+
 
   @override
 
@@ -159,9 +154,17 @@ class _MyHomePageState extends State<MyHomePage>{
             ),
             Row(
               children: <Widget>[
+                Checkbox(
+                  value:  _checked1,
+                  onChanged: (bool value) {
+                    setState(() {
+                      _checked1 = value;
+                    });
+                  },
+                ),
 
 
-                Text('全課題コンプリート！')
+                Text('全課題クリア！')
               ],
             )
 
