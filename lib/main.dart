@@ -38,6 +38,14 @@ class MyHomePage extends StatefulWidget{
 //インスタンスからウィジェットを作る
 
 class _MyHomePageState extends State<MyHomePage>{
+  String _message;
+  var _checked = false;
+  void checkChanged(bool value){
+    setState(() {
+      value = _checked;
+      _message = value ? 'checked!' : 'not checked...';
+    });
+  }
 
   @override
 
@@ -49,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage>{
         title: Text('課題管理App（曜日別）')
       ),
       body:Container(
-        width: double.infinity,
+
         child: ListView(
           children: <Widget>[
             ListTile(
@@ -148,11 +156,22 @@ class _MyHomePageState extends State<MyHomePage>{
                 hintText: '臨時課題があれば記入'
               ),
 
+            ),
+            Row(
+              children: <Widget>[
+
+
+                Text('全課題コンプリート！')
+              ],
             )
+
 
           ],
         ),
+
       )
+
     );
   }
+
 }
