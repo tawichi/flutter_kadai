@@ -38,8 +38,10 @@ class MyHomePage extends StatefulWidget{
 //インスタンスからウィジェットを作る
 
 class _MyHomePageState extends State<MyHomePage>{
-  String _message;
+
+
   bool _checked1 = false;
+  bool result;
 
 
   @override
@@ -51,10 +53,11 @@ class _MyHomePageState extends State<MyHomePage>{
       appBar: AppBar(
         title: Text('課題管理App（曜日別）')
       ),
-      body:Container(
+      body: Container(
 
         child: ListView(
           children: <Widget>[
+
             ListTile(
 
               title: Text('月曜締め切り'),
@@ -64,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage>{
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder:  (context) => MondayPage('泰地'),
+                    builder:  (context) => MondayPage(),
                   )
 
                 );
@@ -112,10 +115,10 @@ class _MyHomePageState extends State<MyHomePage>{
               title: Text('金曜締め切り'),
               trailing:  Icon(Icons.arrow_forward_ios),
               onTap: (){
-                Navigator.push(
+                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder:  (context) => FridayPage(),
+                      builder:  (context) => MyHomePageF(key: PageStorageKey<String>("key_MyHomePageF")),
                     )
                 );
               },
