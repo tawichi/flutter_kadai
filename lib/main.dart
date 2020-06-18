@@ -40,8 +40,8 @@ class MyHomePage extends StatefulWidget{
 class _MyHomePageState extends State<MyHomePage>{
 
 
-  bool _checked1 = false;
-  bool result;
+  //bool _checked1 = false;
+
 
 
   @override
@@ -155,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage>{
               ),
 
             ),
-            Row(
+            /*Row(
               children: <Widget>[
                 Checkbox(
                   value:  _checked1,
@@ -169,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage>{
 
                 Text('全課題クリア！')
               ],
-            )
+            )*/
 
 
           ],

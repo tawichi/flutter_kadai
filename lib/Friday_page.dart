@@ -2,31 +2,50 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterkadai/main.dart';
 
-class FridayPage extends StatelessWidget{
+
+
+/*class FridayPage extends StatelessWidget{
+
+
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return new MyHomePageF();
   }
 
-}
+}*/
 
 class MyHomePageF extends StatefulWidget{
-  MyHomePageF({this.title}): super();
-
-  final String title;
+  MyHomePageF({Key key}) : super(key: key);
 
   @override
-  _MyHomePageStateF createState() => new _MyHomePageStateF();
+
+  State<StatefulWidget> createState() {
+    return _MyHomePageFState();
+  }
+}
+class FridayPageParams {
+  bool _checked1= false ;
 }
 
-class _MyHomePageStateF extends State<MyHomePageF>{
-  String _message;
-  bool _checked1 = false;
-  bool _checked2 = false;
+class _MyHomePageFState extends State<MyHomePageF>{
+  FridayPageParams _params = FridayPageParams();
 
+
+  //bool _checked1 = false ;
 
   @override
+  void didChangeDependencies() { // このメソッドをオーバーライド
+    FridayPageParams p = PageStorage.of(context).readState(context);
+    if (p != null) {
+      _params = p;
+    } else {
+      _params = FridayPageParams();
+    }
+    super.didChangeDependencies();
+  }
 
   Widget build(BuildContext context){
     return Scaffold(
@@ -48,11 +67,13 @@ class _MyHomePageStateF extends State<MyHomePageF>{
             children: <Widget>[
 
               Checkbox(
-                value:  _checked1,
+                value:  _params._checked1,
                 onChanged: (bool value) {
                   setState(() {
-                    _checked1 = value;
+                    _params._checked1 = value;
+
                   });
+                  PageStorage.of(context).writeState(context, _params);
                 },
               ),
               Text('提出済み',)
@@ -69,7 +90,7 @@ class _MyHomePageStateF extends State<MyHomePageF>{
           ),
           RaisedButton(
             onPressed: (){
-              Navigator.pop(context);
+              Navigator.pop(context,);
 
             },
             child: Center(child: Text('戻る')),

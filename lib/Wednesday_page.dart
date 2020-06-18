@@ -7,7 +7,7 @@ class WednesdayPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return   new MyHomePage(
+    return   new MyHomePageW(
 
 
 
@@ -16,19 +16,19 @@ class WednesdayPage extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget{
-  MyHomePage({this.title}): super();
+class MyHomePageW extends StatefulWidget{
+  MyHomePageW({this.title}): super();
 
   final String title;
 
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _MyHomePageWState createState() => new _MyHomePageWState();
 }
 
 
 //インスタンスからウィジェットを作る
 
-class _MyHomePageState extends State<MyHomePage>{
+class _MyHomePageWState extends State<MyHomePageW>{
   String _message;
   bool _checked1 = false;
   bool _checked2 = false;
