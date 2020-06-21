@@ -1,31 +1,49 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SundayPage extends StatelessWidget{
+PageStorageKey mykey = new PageStorageKey("testkey");
+final PageStorageBucket _bucket = new PageStorageBucket();
+
+/*class SundayPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return new MyHomePageSu();
   }
 
-}
+}*/
 
 class MyHomePageSu extends StatefulWidget{
-  MyHomePageSu({this.title}): super();
+  MyHomePageSu({Key key}) : super(key: key);
 
-  final String title;
+
 
   @override
   _MyHomePageStateSu createState() => new _MyHomePageStateSu();
 }
-
-class _MyHomePageStateSu extends State<MyHomePageSu>{
-  String _message;
+class SundayPageParams{
   bool _checked1 = false;
   bool _checked2 = false;
 
+}
+
+class _MyHomePageStateSu extends State<MyHomePageSu>{
+  SundayPageParams  _params = SundayPageParams();
+
 
   @override
+  void didChangeDependencies() { // このメソッドをオーバーライド
+    SundayPageParams p = _bucket.readState(context, identifier: ValueKey(mykey));
+    print(p);
+    if (p != null) {
+      _params = p;
+    } else {
+      _params = SundayPageParams();
+      print(_params._checked1);
+      print(_params._checked2);
+    }
+    super.didChangeDependencies();
+  }
 
   Widget build(BuildContext context){
     return Scaffold(
@@ -47,11 +65,13 @@ class _MyHomePageStateSu extends State<MyHomePageSu>{
             children: <Widget>[
 
               Checkbox(
-                value:  _checked1,
+                value:  _params._checked1,
                 onChanged: (bool value) {
                   setState(() {
-                    _checked1 = value;
+                    _params._checked1 = value;
+
                   });
+                  _bucket.writeState(context, _params, identifier: ValueKey(mykey));
                 },
               ),
               Text('提出済み',)
@@ -68,11 +88,12 @@ class _MyHomePageStateSu extends State<MyHomePageSu>{
             children: <Widget>[
 
               Checkbox(
-                value:  _checked2,
+                value:  _params._checked2,
                 onChanged: (bool value) {
                   setState(() {
-                    _checked2 = value;
+                    _params._checked2 = value;
                   });
+                  _bucket.writeState(context, _params, identifier: ValueKey(mykey));
                 },
               ),
               Text('提出済み',)
@@ -86,6 +107,7 @@ class _MyHomePageStateSu extends State<MyHomePageSu>{
             decoration: InputDecoration(
                 hintText: '特記事項があれば記入'
             ),
+
           ),
           RaisedButton(
             onPressed: (){

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class WednesdayPage extends StatelessWidget {
+/*class WednesdayPage extends StatelessWidget {
   String _message;
   bool _checked = false;
   @override
@@ -14,27 +14,42 @@ class WednesdayPage extends StatelessWidget {
       );
 
   }
-}
+}*/
+PageStorageKey mykey = new PageStorageKey("testkey");
+final PageStorageBucket _bucket = new PageStorageBucket();
 
 class MyHomePageW extends StatefulWidget{
-  MyHomePageW({this.title}): super();
+  MyHomePageW({Key key}) : super(key: key);
 
-  final String title;
+
 
   @override
   _MyHomePageWState createState() => new _MyHomePageWState();
 }
 
-
-//インスタンスからウィジェットを作る
-
-class _MyHomePageWState extends State<MyHomePageW>{
-  String _message;
+class WednesdayParams{
   bool _checked1 = false;
   bool _checked2 = false;
   bool _checked3 = false;
+}
+//インスタンスからウィジェットを作る
+
+class _MyHomePageWState extends State<MyHomePageW>{
+  WednesdayParams _params = WednesdayParams();
+
 
   @override
+  void didChangeDependencies() { // このメソッドをオーバーライド
+    WednesdayParams p = _bucket.readState(context, identifier: ValueKey(mykey));
+    print(p);
+    if (p != null) {
+      _params = p;
+    } else {
+      _params = WednesdayParams();
+      print(_params._checked1);
+    }
+    super.didChangeDependencies();
+  }
 
   Widget build(BuildContext context){
     return Scaffold(
@@ -56,11 +71,13 @@ class _MyHomePageWState extends State<MyHomePageW>{
               children: <Widget>[
 
                 Checkbox(
-                  value:  _checked1,
+                  value:  _params._checked1,
                   onChanged: (bool value) {
                     setState(() {
-                      _checked1 = value;
+                      _params._checked1 = value;
+
                     });
+                    _bucket.writeState(context, _params, identifier: ValueKey(mykey));
                   },
                 ),
                 Text('提出済み',)
@@ -73,11 +90,12 @@ class _MyHomePageWState extends State<MyHomePageW>{
               children: <Widget>[
 
                 Checkbox(
-                  value:  _checked2,
+                  value:  _params._checked2,
                   onChanged: (bool value) {
                     setState(() {
-                      _checked2 = value;
+                      _params._checked2 = value;
                     });
+                    _bucket.writeState(context, _params, identifier: ValueKey(mykey));
                   },
                 ),
                 Text('提出済み'),
@@ -97,11 +115,12 @@ class _MyHomePageWState extends State<MyHomePageW>{
               children: <Widget>[
 
                 Checkbox(
-                  value:  _checked3,
+                  value:  _params._checked3,
                   onChanged: (bool value) {
                     setState(() {
-                      _checked3 = value;
+                      _params._checked3 = value;
                     });
+                    _bucket.writeState(context, _params, identifier: ValueKey(mykey));
                   },
                 ),
                 Text('提出済み',)

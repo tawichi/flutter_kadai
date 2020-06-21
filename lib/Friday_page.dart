@@ -16,6 +16,8 @@ import 'package:flutterkadai/main.dart';
   }
 
 }*/
+PageStorageKey mykey = new PageStorageKey("testkey");
+final PageStorageBucket _bucket = new PageStorageBucket();
 
 class MyHomePageF extends StatefulWidget{
   MyHomePageF({Key key}) : super(key: key);
@@ -38,15 +40,16 @@ class _MyHomePageFState extends State<MyHomePageF>{
 
   @override
   void didChangeDependencies() { // このメソッドをオーバーライド
-    FridayPageParams p = PageStorage.of(context).readState(context);
+    FridayPageParams p = _bucket.readState(context, identifier: ValueKey(mykey));
+    print(p);
     if (p != null) {
       _params = p;
     } else {
       _params = FridayPageParams();
+      print(_params._checked1);
     }
     super.didChangeDependencies();
   }
-
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
@@ -73,7 +76,7 @@ class _MyHomePageFState extends State<MyHomePageF>{
                     _params._checked1 = value;
 
                   });
-                  PageStorage.of(context).writeState(context, _params);
+                  _bucket.writeState(context, _params, identifier: ValueKey(mykey));
                 },
               ),
               Text('提出済み',)

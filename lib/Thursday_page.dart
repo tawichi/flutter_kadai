@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ThursdayPage extends StatelessWidget{
+/*class ThursdayPage extends StatelessWidget{
   String _message;
   bool _checked = false;
   @override
@@ -14,32 +14,44 @@ class ThursdayPage extends StatelessWidget{
     );
 
   }
-}
+}*/
+PageStorageKey mykey = new PageStorageKey("testkey");
+final PageStorageBucket _bucket = new PageStorageBucket();
+
 
 class MyHomePageTh extends StatefulWidget{
-  MyHomePageTh({this.title}): super();
-
-  final String title;
-
+  MyHomePageTh({Key key}) : super(key: key);
   @override
   _MyHomePageThState createState() => new _MyHomePageThState();
 }
 
-
-//インスタンスからウィジェットを作る
-
-class _MyHomePageThState extends State<MyHomePageTh>{
-  String _message;
+class ThursdayPageParams{
   bool _checked1 = false;
   bool _checked2 = false;
   bool _checked3 = false;
   bool _checked4 = false;
   bool _checked5 = false;
-  bool _checked6 = false;
+}
+
+//インスタンスからウィジェットを作る
+
+class _MyHomePageThState extends State<MyHomePageTh>{
+  ThursdayPageParams _params = ThursdayPageParams();
 
 
 
   @override
+  void didChangeDependencies() { // このメソッドをオーバーライド
+    ThursdayPageParams p = _bucket.readState(context, identifier: ValueKey(mykey));
+    print(p);
+    if (p != null) {
+      _params = p;
+    } else {
+      _params = ThursdayPageParams();
+      print(_params._checked1);
+    }
+    super.didChangeDependencies();
+  }
 
   Widget build(BuildContext context){
     return Scaffold(
@@ -61,11 +73,12 @@ class _MyHomePageThState extends State<MyHomePageTh>{
             children: <Widget>[
 
               Checkbox(
-                value:  _checked1,
+                value:  _params._checked1,
                 onChanged: (bool value) {
                   setState(() {
-                    _checked1 = value;
+                    _params._checked1 = value;
                   });
+                  _bucket.writeState(context, _params, identifier: ValueKey(mykey));
                 },
               ),
               Text('提出済み',)
@@ -78,11 +91,12 @@ class _MyHomePageThState extends State<MyHomePageTh>{
             children: <Widget>[
 
               Checkbox(
-                value:  _checked2,
+                value:  _params._checked2,
                 onChanged: (bool value) {
                   setState(() {
-                    _checked2 = value;
+                    _params._checked2 = value;
                   });
+                  _bucket.writeState(context, _params, identifier: ValueKey(mykey));
                 },
               ),
               Text('提出済み'),
@@ -98,11 +112,12 @@ class _MyHomePageThState extends State<MyHomePageTh>{
             children: <Widget>[
 
               Checkbox(
-                value:  _checked3,
+                value:  _params._checked3,
                 onChanged: (bool value) {
                   setState(() {
-                    _checked3 = value;
+                    _params._checked3 = value;
                   });
+                  _bucket.writeState(context, _params, identifier: ValueKey(mykey));
                 },
               ),
               Text('提出済み'),
@@ -118,11 +133,12 @@ class _MyHomePageThState extends State<MyHomePageTh>{
             children: <Widget>[
 
               Checkbox(
-                value:  _checked4,
+                value:  _params._checked4,
                 onChanged: (bool value) {
                   setState(() {
-                    _checked4 = value;
+                    _params._checked4 = value;
                   });
+                  _bucket.writeState(context, _params, identifier: ValueKey(mykey));
                 },
               ),
               Text('提出済み'),
@@ -142,11 +158,12 @@ class _MyHomePageThState extends State<MyHomePageTh>{
             children: <Widget>[
 
               Checkbox(
-                value:  _checked5,
+                value:  _params._checked5,
                 onChanged: (bool value) {
                   setState(() {
-                    _checked5 = value;
+                    _params._checked5 = value;
                   });
+                  _bucket.writeState(context, _params, identifier: ValueKey(mykey));
                 },
               ),
               Text('提出済み',)

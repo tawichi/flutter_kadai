@@ -8,6 +8,8 @@ import 'package:flutterkadai/Tuesday_page.dart';
 import 'package:flutterkadai/Wednesday_page.dart';
 
 void main() => runApp(new MyApp());
+PageStorageKey mykey = new PageStorageKey("testkey");
+final PageStorageBucket _bucket = new PageStorageBucket();
 
 
 class MyApp extends StatelessWidget{
@@ -15,18 +17,21 @@ class MyApp extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    return new MaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
-      home: new MyHomePage(
-        title:this.title,
-
+      home: PageStorage(
+        bucket: _bucket,
+        key: mykey,
+        child: MyHomePage(
+          title:this.title,
+        ),
       ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget{
-  MyHomePage({this.title}): super();
+  MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
 
@@ -94,9 +99,10 @@ class _MyHomePageState extends State<MyHomePage>{
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder:  (context) => WednesdayPage(),
+                      builder:  (context) => MyHomePageW(key: PageStorageKey<String>("key_MyHomePageW")),
                     )
                 );
+
               },
             ),
             ListTile(
@@ -106,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage>{
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder:  (context) => ThursdayPage(),
+                      builder:  (context) => MyHomePageTh(key: PageStorageKey<String>("key_MyHomePageTh")),
                     )
                 );
               },
@@ -142,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage>{
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder:  (context) => SundayPage(),
+                      builder:  (context) => MyHomePageSu(key: PageStorageKey<String>("key_MyHomePageSu")),
                     )
                 );
               },
